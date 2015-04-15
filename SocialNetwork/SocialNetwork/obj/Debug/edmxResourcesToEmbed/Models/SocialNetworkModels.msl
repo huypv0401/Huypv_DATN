@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SocialNetworkModelStoreContainer" CdmEntityContainer="SocialNetworkEntities">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="link" ColumnName="link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Like">
+        <MappingFragment StoreEntitySet="Like">
+          <ScalarProperty Name="likeId" ColumnName="likeId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="like1" ColumnName="like" />
+          <ScalarProperty Name="dislike" ColumnName="dislike" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="timeHide" ColumnName="timeHide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Relationships">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Relationship">
+        <MappingFragment StoreEntitySet="Relationship">
+          <ScalarProperty Name="relationshipId" ColumnName="relationshipId" />
+          <ScalarProperty Name="userId_One" ColumnName="userId_One" />
+          <ScalarProperty Name="userId_Two" ColumnName="userId_Two" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SocialNetworkModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="nickName" ColumnName="nickName" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

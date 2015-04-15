@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SocialNetwork.Models.User>
+
+@{
+    ViewBag.Title = "ResultSearch";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h4>ResultSearch</h4>
+
+@foreach (var item in Model)
+{
+    <div class="user_container" style="display:block">
+        <div class="avatar">
+            <img class="img-thumbnail" src="@item.avatar" />
+        </div>
+        <div class="info">
+            @Html.ActionLink(@item.nickName, "UserPage", "Posts", new { id = @item.userId })
+        </div>
+    </div>
+}

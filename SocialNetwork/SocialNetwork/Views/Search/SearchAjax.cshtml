@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "SearchAjax";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<style type="text/css">
+    #wrapper {
+        height:550px;
+        width: 500px;
+        margin: auto;
+    }
+    #searchbar {
+        height: 40px;
+        width: 488px;
+        background: #3e5c9a;
+    }
+    #searchText {
+        margin: 9px 0 9px 10px;
+        min-width: 400px;
+        border-radius: 4px;
+    }
+    #contactBox {
+        background: white;
+        border: 1px solid #dddbdb;
+        float: left;
+        position: absolute;
+        top: 39px;
+        margin-left: 10px;
+        border-radius: 4px;
+        min-width: 450px;
+        min-height: 30px;
+    }
+    .clsHide{
+        display: none;
+    }
+ 
+    ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 0pt;
+    }
+ 
+    li {
+        height: 52px;
+        cursor: pointer;
+        font-family: Arial;
+    }
+ 
+    li .cname{
+        font-weight: bold;
+    }
+ 
+    li .caddress {
+        font-size: 0.7em;
+    }
+ 
+    li .cinfo {
+        margin-top: 5px;
+        display: inline-block;
+        width: 400px;
+        /*border: 1px solid red;*/
+    }
+ 
+    li.selected {
+        background: #3e5c9a;
+        color: white;
+    }
+ 
+    li.hover {
+        background: #3e5c9a;
+        color: white;
+    }
+ 
+    .cphoto {
+        width: 42px;
+        height: 42px;
+        float: left;
+        display: block;
+        margin: 3px;
+        border-radius: 3px;
+    }
+ 
+    #loadingDiv{
+        display: none;
+    }
+
+</style>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#searchText').keyup(function (e) {
+            //alert("Ảd");
+            delay(function () {
+                var key = null;
+                if (e.which != null) {
+                    key = e.which;
+                } else {
+                    key = e.keyCode;
+                }
+                if ($('#searchText').val().trim() != '' && key != 40 && key != 39 && key != 38 && key != 37) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetSearchResult", "Search")',
+                        data: "{'search' : '" + $('#searchText').val() + "'}",
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        beforeSend: function () {
+                            $('#results').html('');
+                            $('#loadingDiv').show();
+                        },
+                        complete: function () {
+                            $('#loadingDiv').hide();
+                        },
+                        success: function (data) {
+                            alert(data);
+                            $('#results').append(data);
+
+                        },
+                        error: function (data) {
+                            alert("Error!");
+                        }
+                    });
+
+                    $('#contactBox').removeClass('clsHide');
+                }else{
+                    $('#contactBox').removeClass('clsHide');
+                }
+            }, 700);
+
+        });
+
+        $('#searchText').blur(function () {
+            if($('#searchText').val().trim()=='')
+            {
+                $('#contactBox').addClass('clsHide');
+            }
+        });
+
+        $("#results").on("mouseover", "li", function () {
+            $(this).addClass('hover');
+            liSelected.removeClass('selected');
+        });
+        $("#results").on("mouseout", "li", function () {
+            $(this).removeClass('hover');
+        });
+
+        var li = $('#results li');
+        var liSelected;
+        $(window).keydown(function (e) {
+            if (e.which === 40) {
+                $('#results li').removeClass('hover');
+                if (liSelected) {
+                    liSelected.removeClass('selected');
+                    next = liSelected.next();
+                    if (next.length > 0) {
+                        liSelected = next.addClass('selected');
+                    } else {
+                        liSelected = $('#results li').eq(0).addClass('selected');
+                    }
+                } else {
+                    liSelected = $('#results li').eq(0).addClass('selected');
+                }
+
+            } else if (e.which === 38) {
+                $('#results li').removeClass('hover');
+                if (liSelected) {
+                    liSelected.removeClass('selected');
+                    next = liSelected.prev();
+                    if (next.length > 0) {
+                        liSelected = next.addClass('selected');
+                    } else {
+                        liSelected = $('#results li').last().addClass('selected');
+                    }
+                } else {
+                    liSelected = $('#results li').last().addClass('selected');
+                }
+            }
+        });
+
+    });
+
+    var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+</script>
+
+
+
+
+<h2>SearchAjax</h2>
+
+<div>
+    <div id="wrapper">
+        <div>
+            <div id="searchbar">
+                <input type="search" id="searchText" /><button>Search</button>
+                <div id="contactBox" class="clsHide">
+                    <div id="cdisiplay">
+                        <ul id="results"></ul>
+                    </div>
+                    <div id="loadingDiv">
+                        <img src="~/Content/images/Icon/loading.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

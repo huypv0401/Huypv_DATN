@@ -1,0 +1,462 @@
+﻿.post_container ,.profile{
+    height: auto;
+    margin: 0px auto 15px;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    -webkit-border-radius: 3px;
+    background: #fff;
+}
+
+.post_container {
+    padding: 5px;
+}
+
+.post_info {
+    display: inline-block;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.post_nickName {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.post_avatar {
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+
+.post_image {
+    margin: 0 auto;
+}
+
+
+.avatar {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+
+a.btn-chat {
+    clear: both;
+    width: 27px;
+    height: 27px;
+    background-image: url(images/Icon/6fGwn81s1W1.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0 -503px;
+}
+
+.post {
+    height: auto;
+    border: 1px solid;
+    border-color: #d3d6db;
+    -webkit-border-radius: 3px;
+    background: #fff;
+    margin-bottom: 15px;
+}
+
+.head, .post_bottom {
+    height: 35px;
+    background-color: #e9eaed;
+    border-bottom: 1px solid #e9eaed;
+}
+
+.post_text {
+    border: none;
+    width: 100%;
+    outline: none;
+}
+
+
+
+.textarea-container {
+    position: relative;
+    width: 100%;
+}
+
+textarea, .textarea-size {
+    min-height: 100px;
+    font-family: sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding: 4px;
+    overflow: hidden;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+textarea {
+    height: 100%;
+    position: absolute;
+    resize: none;
+    white-space: normal;
+}
+
+.textarea-size {
+    visibility: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#img {
+    height: 100px;
+}
+
+#x {
+    display: none;
+    position: relative;
+    z-index: 2000;
+    margin-top: 50px;
+}
+
+    #x:hover, #uploadFile {
+        cursor: pointer;
+    }
+
+#btnUploadFile {
+    float: right;
+    width: 80px;
+    opacity: initial;
+}
+
+#uploadFile {
+    display: inline-block;
+}
+
+.comment {
+    background-color: #f2f2f2;
+}
+
+.comment_avatar {
+    height: 30px;
+    /*width:30px;*/
+    float: left;
+}
+
+.comment_text {
+    height: auto;
+    /*width:90%;*/
+    margin-left: 5px;
+    display: inline-block;
+}
+
+    .comment_text input {
+        height: 30px;
+        width: 100%;
+    }
+
+/*-----------------------*/
+.like {
+    width: 33.33%;
+}
+
+.dislike {
+    width: 33.33%;
+}
+
+.cmt {
+    width: 33.33%;
+}
+
+.post_like table tr td a {
+    clear: both;
+    color: #7f7f7f;
+    height: 100%;
+    width: 100%;
+    display: block;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+    .post_like table tr td a:hover {
+        text-decoration: none;
+        background-color: #e9eaed;
+    }
+
+    .post_like table tr td a:visited {
+        text-decoration: none;
+    }
+
+i {
+    background-image: url('images/Icon/CMr7TxVDtMX.png');
+    background-size: auto;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+}
+
+.ilike {
+    background-position: 0 -245px;
+}
+
+.idislike {
+    background-position: 0 -245px;
+    transform: rotateX(180deg);
+}
+
+.icmt {
+    background-position: -34px -228px;
+}
+
+
+.iliked {
+    background-position: -15px -245px;
+}
+
+.idisliked {
+    background-position: -15px -245px;
+    transform: rotateX(180deg);
+}
+
+span.spanDisLiked, span.spanLiked {
+    color: #0026ff;
+    display: inline-block;
+}
+/*-------------------------*/
+.col1 {
+    width: 8%;
+}
+
+    .col1 img {
+        width: 30px;
+        height: 30px;
+    }
+
+.col2 {
+    width: 77%;
+}
+
+    .col2 input {
+        width: 100%;
+        height: 30px;
+        line-height: 100%;
+        border: 1px solid;
+        border-color: #d3d6db;
+        border-right: none;
+        outline: none;
+    }
+
+.col3 {
+    width: 15%;
+}
+
+table, tr, td {
+    width: 100%;
+    text-align: center;
+}
+
+hr {
+    margin: 7px;
+}
+
+.comment table tr td span {
+    display: block;
+    color: black;
+    text-align: left;
+}
+
+.comment table tr td a {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#password, #sex {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+b{
+    float:left;
+    margin-left:30px;
+}
+
+.favorite{
+    display:block;
+    margin-bottom:5px;
+}
+.favorite:hover{
+    text-decoration:none;
+    background-color:#d3d6db;
+    
+}
+.chatgr{
+    display:block;
+    margin-bottom:5px;    
+}
+.chatgr:hover{
+    text-decoration:none;
+    background-color:#d3d6db;
+}
+
+.col_right{
+    height:85vh;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    background: white;
+    position:fixed;
+    width:20%;
+}
+.show{
+    width:300px;
+    min-height:100px;
+    position:absolute;
+    z-index:3;
+    background-color:white;
+    border: 1px solid #d3d6db;
+    box-shadow: 0 0 10px black;
+    border-radius:3px;
+}
+.acc_infor{
+    height:100px;
+}
+.acc_bottom{
+    height:35px;
+    margin-top:3px;
+    background-color:#dfe0e4;
+}
+.acc_avatar{
+    width:100px;
+    height:100px;
+    display:inline-block;
+    float:left;
+}
+.acc_nickName{
+    width:150px;
+    height:100px;
+    display:inline-block;
+}
+.acc_nickName p{
+    margin-top:45px;
+    margin-left:20px;
+}
+
+.profile table tr{
+    min-height:40px;
+    line-height:40px;
+    border-bottom:1px solid #d3d6db
+}
+
+.profile table tr:hover{
+    background-color:#e9eaed;
+}
+
+.col_1, .col_3{
+    width:20%;
+}
+.col_2{
+    width:60%;
+}
+
+
+.changePass{
+    margin: 0px auto 15px;
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    -webkit-border-radius: 3px;
+    background: #fff;
+    width:70%;
+    height:auto;
+}
+
+
+
+
+/*-------------------------Search------------------------------*/
+
+    #searchbar {
+        display:inline-block;
+        height: 40px;
+        width: 250px;
+        float:left;
+        padding-top:13px;
+    }
+    #searchText {
+        min-width: 100px;
+        border-radius: 4px;
+        border:none;
+        height:29px;
+        line-height:28px;
+    }
+    #contactBox {
+        background: white;
+        border: 1px solid #dddbdb;
+        float: left;
+        position: absolute;
+        top: 39px;
+        margin-top:4px;
+        border-radius: 4px;
+        min-width: 450px;
+        min-height: 30px;
+    }
+    .clsHide{
+        display: none;
+    }
+ 
+    ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 0pt;
+    }
+ 
+    li {
+        height: 52px;
+        cursor: pointer;
+        font-family: Arial;
+    }
+ 
+    li .cname{
+        font-weight: bold;
+    }
+ 
+    li .caddress {
+        font-size: 0.7em;
+    }
+ 
+    li .cinfo {
+        margin-top: 5px;
+        display: inline-block;
+        width: 400px;
+        /*border: 1px solid red;*/
+    }
+ 
+    li.selected {
+        background: #3e5c9a;
+        color: white;
+    }
+ 
+    li.hover {
+        background: #3e5c9a;
+        color: white;
+    }
+ li a{
+     display:block;
+ }
+    .cphoto {
+        width: 42px;
+        height: 42px;
+        float: left;
+        display: block;
+        margin: 3px;
+        border-radius: 3px;
+    }
+ 
+    #loadingDiv{
+        display: none;
+    }

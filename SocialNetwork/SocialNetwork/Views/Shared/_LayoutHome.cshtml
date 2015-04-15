@@ -1,0 +1,138 @@
+﻿@using SocialNetwork.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="Social NoName" />
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Content/js/Search.js"></script>
+</head>
+<body style="background-color:#e9eaed">
+    @{
+        User user = (User)System.Web.HttpContext.Current.Session["User"];
+    }
+    <div class="navbar nav-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-text" style="margin-left:20%;color:white;font-size:18px" href='@Url.Action("Index", "Home")'>NoName</a>
+            @*@Html.ActionLink("SearchAjax", "SearchAjax", "Search")*@
+
+
+            <div id="searchbar">
+                <input type="search" id="searchText" />
+                <button class="btn btn-sm btn-info">Search</button>
+                <div id="contactBox" class="clsHide">
+                    <div id="cdisiplay">
+                        <ul id="results"></ul>
+                    </div>
+                    <div id="loadingDiv">
+                        <img src="~/Content/images/Icon/loading.gif" />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <img class="img-responsive post_avatar navbar-btn" src="@user.avatar" alt="Avatar" />
+            <a class="navbar-text" style=" color:white;font-size:15px" href='@Url.Action("UserPage", "Posts", new { id = @user.userId })'>@user.nickName!</a>
+
+
+            <a class="navbar-text" style="float:right; margin-right:20%;color:white;font-size:18px" href='@Url.Action("Logout", "Account")'>Đăng xuất</a>
+        </div>
+        @*</div>*@
+    </div>
+    <div style="margin:0 auto">
+        <div class="container-fluid margin-top" style="margin-top:70px">
+            <div class="row-fluid">
+                <div class="col-lg-3 col-md-3 col-sm-3" style="position:relative;">
+                    <div style="width:80%;float:right">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                @{
+                                    if (@ViewBag.avatar != null)
+                                    {<img class="img-responsive img-circle" style="float:left" alt="avatar" src="@ViewBag.avatar" />}
+                                    else
+                                    {<img class="img-responsive img-circle" style="float:left" alt="avatar" src="@user.avatar" />}
+                                }
+                                @*<input type="hidden" id="userId" value="@ViewBag.userId" />*@
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                @{
+                                    if (@ViewBag.userId != null && user.userId != @ViewBag.userId)
+                                    {
+                                        <a style=" color:#0026ff;font-size:17px; font-weight:bold;display:block;padding-top:15px" href='@Url.Action("UserPage", "Posts", new { id = @ViewBag.userId })'>@ViewBag.nickName</a>
+                                        <input type="button" onclick="follow(@user.userId,@ViewBag.userId)" class=" btn btn-sm btn-info " value="Theo dõi" />
+                                        <input type="button" class=" btn btn-sm btn-info " value="Nhắn tin" />
+
+                                    }
+                                    else
+                                    {
+                                        <a style=" color:#0026ff;font-size:17px; font-weight:bold;display:block;padding-top:15px" href='@Url.Action("UserPage", "Posts", new { id = @user.userId })'>@user.nickName</a>
+                                        <a style=" color:#0026ff;font-size:12px" href='@Url.Action("Profile", "AccountDetail", new { id = @user.userId })'>Chỉnh sửa thông tin cá nhân</a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:70%;float:right;height:auto">
+                        <hr />
+                        <h3>Bạn cùng sở thích</h3>
+                        <hr />
+                        <div style="height:150px; overflow:scroll;overflow-x:hidden">
+                            @*@foreach (var item in ViewData["favorites"] as List<Favorite>)
+                            {
+                                <div class="row">
+                                    <div class="span4">
+                                        <input type="checkbox" style="float:right" />
+                                    </div>
+                                    <div class="span8">
+
+                                        <a class="favorite" href='@Url.Action("EditAccount", "AccountDetail", new { id = item.favoriteId })'>@item.favoriteName</a>
+                                    </div>
+                                </div>
+                            }*@
+                        </div>
+                        <hr />
+                        @Html.ActionLink("Tìm kiếm bạn mới", "Index", "Search")
+                        <hr />
+                        <h3>Trò chuyện</h3>
+                        <hr />
+                        <div style="height:150px; overflow:scroll;overflow-x:hidden">
+                            <div class="row">
+                                <div class="span4">
+                                </div>
+                                <div class="span8">
+                                    <a class="chatgr" href='#'>Tình yêu</a>
+                                    <a class="chatgr" href='#'>Tình bạn</a>
+                                    <a class="chatgr" href='#'>Trường học</a>
+                                    <a class="chatgr" href='#'>Gia đình</a>
+                                    <a class="chatgr" href='#'>Không chủ đề</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6" id="posts" style="position:center">
+                    @RenderBody()
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 " style="float:right ">
+
+                    <div class="col_right">
+                        <span>jsfhiuh</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

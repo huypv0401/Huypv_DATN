@@ -1,0 +1,17 @@
+﻿@model SocialNetwork.Models.ViewModel.SearchViewModels
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-horizontal">
+        <h4>Search</h4>
+        <p>Nhập tên cần tìm</p>
+        @Html.EditorFor(model => model.name)
+
+        <input type="submit" class="btn btn-sm btn-info" value="Tìm" />
+    </div>
+}

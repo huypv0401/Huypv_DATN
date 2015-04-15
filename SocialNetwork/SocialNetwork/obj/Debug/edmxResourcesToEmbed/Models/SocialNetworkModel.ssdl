@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SocialNetworkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Addr">
+    <Key>
+      <PropertyRef Name="addrId" />
+    </Key>
+    <Property Name="addrId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="conntryId" Type="int" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="commentId" />
+    </Key>
+    <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="postId" Type="int" />
+    <Property Name="userId" Type="int" />
+    <Property Name="imageId" Type="int" />
+    <Property Name="text" Type="nvarchar" MaxLength="1024" />
+    <Property Name="time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="countryId" />
+    </Key>
+    <Property Name="countryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="countryName" Type="nvarchar" MaxLength="50" />
+    <Property Name="countyId" Type="int" />
+  </EntityType>
+  <EntityType Name="County">
+    <Key>
+      <PropertyRef Name="countyId" />
+    </Key>
+    <Property Name="countyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="countyName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Favorite">
+    <Key>
+      <PropertyRef Name="favoriteId" />
+    </Key>
+    <Property Name="favoriteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="favoriteName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Favorite_User">
+    <Key>
+      <PropertyRef Name="favorite_UserId" />
+    </Key>
+    <Property Name="favorite_UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="favoriteId" Type="int" />
+    <Property Name="userId" Type="int" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="imageId" />
+    </Key>
+    <Property Name="imageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="link" Type="varchar" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="likeId" />
+    </Key>
+    <Property Name="likeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="postId" Type="int" />
+    <Property Name="userId" Type="int" />
+    <Property Name="like" Type="bit" />
+    <Property Name="dislike" Type="bit" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="postId" />
+    </Key>
+    <Property Name="postId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="int" />
+    <Property Name="imageId" Type="int" />
+    <Property Name="text" Type="nvarchar" MaxLength="1024" />
+    <Property Name="timePost" Type="datetime" />
+    <Property Name="timeHide" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Relationship">
+    <Key>
+      <PropertyRef Name="relationshipId" />
+    </Key>
+    <Property Name="relationshipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user" Type="int" />
+    <Property Name="userFollow" Type="int" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="35" Nullable="false" />
+    <Property Name="nickName" Type="nvarchar" MaxLength="100" />
+    <Property Name="avatar" Type="varchar" MaxLength="1024" />
+    <Property Name="phone" Type="varchar" MaxLength="15" />
+    <Property Name="sex" Type="bit" />
+    <Property Name="birthday" Type="datetime" />
+    <Property Name="regDate" Type="datetime" />
+    <Property Name="rememberMe" Type="bit" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="favorite_UserId" Type="int" />
+    <Property Name="addrId" Type="int" />
+    <Property Name="relationshipId" Type="int" />
+  </EntityType>
+  <Association Name="FK__Addr__conntryId__1A14E395">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Addr" Type="Self.Addr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="countryId" />
+      </Principal>
+      <Dependent Role="Addr">
+        <PropertyRef Name="conntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__imageId__2F10007B">
+    <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="imageId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="imageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__postId__2D27B809">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="postId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="postId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__userId__2E1BDC42">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Country__countyI__173876EA">
+    <End Role="County" Type="Self.County" Multiplicity="0..1" />
+    <End Role="Country" Type="Self.Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="County">
+        <PropertyRef Name="countyId" />
+      </Principal>
+      <Dependent Role="Country">
+        <PropertyRef Name="countyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorite___favor__1273C1CD">
+    <End Role="Favorite" Type="Self.Favorite" Multiplicity="0..1" />
+    <End Role="Favorite_User" Type="Self.Favorite_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Favorite">
+        <PropertyRef Name="favoriteId" />
+      </Principal>
+      <Dependent Role="Favorite_User">
+        <PropertyRef Name="favoriteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Like__postId__29572725">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="postId" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="postId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Like__userId__2A4B4B5E">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post__imageId__267ABA7A">
+    <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Image">
+        <PropertyRef Name="imageId" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="imageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Post__userId__25869641">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__addrId__1FCDBCEB">
+    <End Role="Addr" Type="Self.Addr" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Addr">
+        <PropertyRef Name="addrId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="addrId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__favorite_U__1ED998B2">
+    <End Role="Favorite_User" Type="Self.Favorite_User" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Favorite_User">
+        <PropertyRef Name="favorite_UserId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="favorite_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__relationsh__20C1E124">
+    <End Role="Relationship" Type="Self.Relationship" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relationship">
+        <PropertyRef Name="relationshipId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="relationshipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SocialNetworkModelStoreContainer">
+    <EntitySet Name="Addr" EntityType="Self.Addr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="County" EntityType="Self.County" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Favorite" EntityType="Self.Favorite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Favorite_User" EntityType="Self.Favorite_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Like" EntityType="Self.Like" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Addr__conntryId__1A14E395" Association="Self.FK__Addr__conntryId__1A14E395">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Addr" EntitySet="Addr" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__imageId__2F10007B" Association="Self.FK__Comment__imageId__2F10007B">
+      <End Role="Image" EntitySet="Image" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__postId__2D27B809" Association="Self.FK__Comment__postId__2D27B809">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__userId__2E1BDC42" Association="Self.FK__Comment__userId__2E1BDC42">
+      <End Role="User" EntitySet="User" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Country__countyI__173876EA" Association="Self.FK__Country__countyI__173876EA">
+      <End Role="County" EntitySet="County" />
+      <End Role="Country" EntitySet="Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorite___favor__1273C1CD" Association="Self.FK__Favorite___favor__1273C1CD">
+      <End Role="Favorite" EntitySet="Favorite" />
+      <End Role="Favorite_User" EntitySet="Favorite_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Like__postId__29572725" Association="Self.FK__Like__postId__29572725">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Like__userId__2A4B4B5E" Association="Self.FK__Like__userId__2A4B4B5E">
+      <End Role="User" EntitySet="User" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post__imageId__267ABA7A" Association="Self.FK__Post__imageId__267ABA7A">
+      <End Role="Image" EntitySet="Image" />
+      <End Role="Post" EntitySet="Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Post__userId__25869641" Association="Self.FK__Post__userId__25869641">
+      <End Role="User" EntitySet="User" />
+      <End Role="Post" EntitySet="Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__addrId__1FCDBCEB" Association="Self.FK__User__addrId__1FCDBCEB">
+      <End Role="Addr" EntitySet="Addr" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__favorite_U__1ED998B2" Association="Self.FK__User__favorite_U__1ED998B2">
+      <End Role="Favorite_User" EntitySet="Favorite_User" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__relationsh__20C1E124" Association="Self.FK__User__relationsh__20C1E124">
+      <End Role="Relationship" EntitySet="Relationship" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

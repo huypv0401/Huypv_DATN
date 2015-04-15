@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SocialNetworkModelStoreContainer" CdmEntityContainer="SocialNetworkEntities">
+    <EntitySetMapping Name="Addrs">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Addr">
+        <MappingFragment StoreEntitySet="Addr">
+          <ScalarProperty Name="addrId" ColumnName="addrId" />
+          <ScalarProperty Name="conntryId" ColumnName="conntryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="time" ColumnName="time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="countryName" ColumnName="countryName" />
+          <ScalarProperty Name="countyId" ColumnName="countyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Counties">
+      <EntityTypeMapping TypeName="SocialNetworkModel.County">
+        <MappingFragment StoreEntitySet="County">
+          <ScalarProperty Name="countyId" ColumnName="countyId" />
+          <ScalarProperty Name="countyName" ColumnName="countyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favorites">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Favorite">
+        <MappingFragment StoreEntitySet="Favorite">
+          <ScalarProperty Name="favoriteId" ColumnName="favoriteId" />
+          <ScalarProperty Name="favoriteName" ColumnName="favoriteName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favorite_User">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Favorite_User">
+        <MappingFragment StoreEntitySet="Favorite_User">
+          <ScalarProperty Name="favorite_UserId" ColumnName="favorite_UserId" />
+          <ScalarProperty Name="favoriteId" ColumnName="favoriteId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
+          <ScalarProperty Name="link" ColumnName="link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Like">
+        <MappingFragment StoreEntitySet="Like">
+          <ScalarProperty Name="likeId" ColumnName="likeId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="like1" ColumnName="like" />
+          <ScalarProperty Name="dislike" ColumnName="dislike" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="imageId" ColumnName="imageId" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="timePost" ColumnName="timePost" />
+          <ScalarProperty Name="timeHide" ColumnName="timeHide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Relationships">
+      <EntityTypeMapping TypeName="SocialNetworkModel.Relationship">
+        <MappingFragment StoreEntitySet="Relationship">
+          <ScalarProperty Name="relationshipId" ColumnName="relationshipId" />
+          <ScalarProperty Name="user" ColumnName="user" />
+          <ScalarProperty Name="userFollow" ColumnName="userFollow" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SocialNetworkModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="nickName" ColumnName="nickName" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="sex" ColumnName="sex" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="regDate" ColumnName="regDate" />
+          <ScalarProperty Name="rememberMe" ColumnName="rememberMe" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="favorite_UserId" ColumnName="favorite_UserId" />
+          <ScalarProperty Name="addrId" ColumnName="addrId" />
+          <ScalarProperty Name="relationshipId" ColumnName="relationshipId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Social NoName</title>
+    <meta name="description" content="Social NoName" />
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top nav-custom">
+        <div class="container">
+                <a class="navbar-text" style="margin-left:50px; color:white;font-size:18px" href='@Url.Action("Index", "Home")'>Social NoName</a>
+        </div>
+    </div>
+
+    <div class="container-fluid margin-top">
+        <div class="row-fluid">
+            <div style="padding:80px;" class="col-md-8">
+                <img src="~/Content/images/social-image.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-md-4">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My Social Network Application</p>
+    </footer>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

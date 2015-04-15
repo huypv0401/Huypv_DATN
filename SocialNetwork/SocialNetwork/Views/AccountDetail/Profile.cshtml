@@ -1,0 +1,78 @@
+﻿@model SocialNetwork.Models.User
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+@Styles.Render("~/bundles/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Content/js/JavaScript.js"></script>
+<link href="~/Content/Style.css" rel="stylesheet" />
+<h4>Thiết lập tài khoản</h4>
+
+@using (Html.BeginForm("UpdateProfile", "AccountDetail", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    
+    <div class="profile">
+        <table>
+            <tr>
+                <td class="col_1"><span>Ảnh đại diện</span></td>
+                <td class="col_2">
+                    <img class="img-thumbnail img-responsive" id="image_change_avatar" src="@Html.DisplayFor(model => model.avatar)" style="height:100px;width:100px" />
+                    <input type="file" id="change_avatar" value="chọn ảnh" style="display:inline-block" class="btn btn-sm btn-info" />
+                    
+                </td>
+                <td class="col_3">
+                    
+                    <input type="button" onclick="updateAvatar(@Html.DisplayFor(model => model.userId))" id="idUpdateAvatar" style="display:none" class="btn btn-sm btn-info" value="Thay đổi" />
+                    <input type="button" onclick="undoAvatar()" class="btn btn-sm btn-info" value="Hủy" id="idUndoAvatar" style="display:none" />
+                </td>
+            </tr>
+            <tr>
+                <td class="col_1"><span>Tên người dùng</span></td>
+                <td class="col_2"><span>@Html.EditorFor(model => model.nickName, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td class="col_3"></td>
+            </tr>
+            <tr>
+                <td class="col_1"><span>Mật khẩu</span></td>
+                <td class="col_2"></td>
+                <td class="col_3">
+                    
+                    @Html.ActionLink("Đổi mật khẩu", "ChangePass")
+                </td>
+
+            </tr>
+            <tr>
+                <td class="col_1"><span>Số điện thoại</span></td>
+                <td class="col_2"><span>@Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td class="col_3"></td>
+            </tr>
+            <tr>
+                <td class="col_1"><span>Ngày sinh</span></td>
+                <td class="col_2"><span>@Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td class="col_3"></td>
+            </tr>
+            <tr>
+                <td class="col_1"><span>Quốc gia</span></td>
+                <td class="col_2"><span>@Html.EditorFor(model => model.Addr.Country.countryName, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td class="col_3"></td>
+            </tr>
+            <tr>
+                <td class="col_1"><span>Tỉnh/Thành phố</span></td>
+                <td class="col_2"><span>@Html.EditorFor(model => model.Addr.Country.County.countyName, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td class="col_3"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="submit" value=" Hoàn Thành" class="btn btn-sm btn-info" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <span style="display:none">@Html.EditorFor(model=> model.userId)</span>
+}

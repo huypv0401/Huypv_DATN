@@ -1,0 +1,169 @@
+﻿@model IEnumerable<SocialNetwork.Models.Post>
+@using SocialNetwork.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<link href="~/Content/Style.css" rel="stylesheet" />
+@Styles.Render("~/bundles/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="~/Content/js/JavaScriptIndex.js"></script>
+<script src="~/Content/js/JavaScript.js"></script>
+@{
+    User user = (User)System.Web.HttpContext.Current.Session["User"];
+}
+
+<div class="post">
+    <div class="head"><p class="text-center text-success">Cập nhật trạng thái</p></div>
+    <div id="post">
+        <div class="textarea-container">
+            <textarea id="text" onclick="clickText()" placeholder="Hãy viết gì đó..."></textarea>
+            <div class="textarea-size"></div>
+
+        </div>
+        <span id="x" onclick="destroy()">[X]</span>
+    </div>
+    <div class="post_bottom" id="post_bottom" style="height:35px">
+
+        <input type='file' id="uploadFile" class="btn btn-sm btn-info" title="abcj" />
+
+        <input id="btnUploadFile" class="btn btn-sm btn-info" type="button" value="Đăng" onclick="createPost()" />
+    </div>
+</div>
+
+<div id="postList">
+    @foreach (var item in Model)
+    {
+        <div class="post_container">
+            <div class="post_head">
+                <div class="post_avatar">
+                    <img class="img-responsive" alt="avatar" src="@item.User.avatar" />
+                </div>
+                <div class="post_info">
+                    <div class="post_nickName" id="post_nickName_@{@item.userId}_@item.postId">
+                        @* @Html.ActionLink(@item.User.nickName, "UserPage", "Posts", new { id = @item.userId }, new { @id = @item.userId })*@
+                        <a id="@item.userId"  onmouseover="hoverAcc(event,@item.userId,@item.postId,0)" href="http://localhost:53130/Posts/UserPage/@item.userId"> @item.User.nickName  </a>
+
+
+                    </div>
+                    <div  class="post_time">@item.timePost)</div>
+                </div>
+            </div>
+            <div class="post_context"><p>@item.text</p></div>
+            <div class="post_image">
+                <img class="img-responsive" style="margin:0 auto" alt="avatar" src="@item.Image.link" />
+            </div>
+            <hr />
+            <div class="post_like">
+                <table>
+                    <tr>
+                        <td class="like" id="like_@item.postId">
+                            <a title="Thích điều này" role="button" onclick="like(true,@item.postId,@user.userId)">
+                                @if (item.Likes.Count != 0)
+                                {
+                                    <script type="text/javascript">
+                                        loadLike(@item.postId, @user.userId);
+                                    </script>
+                                }
+                                <i class="ilike" id="ilike_@item.postId"></i>
+                                <span id="spanlike_@item.postId">Thích</span>
+                            </a>
+                            <span id="sumLike_@item.postId"></span>
+                        </td>
+                        <td class="dislike" id="dislike_@item.postId">
+                            <a title="Thích điều này" role="button" onclick="like(false,@item.postId,@user.userId)">
+                                <i class="idislike" id="idislike_@item.postId"></i>
+                                <span id="spandislike_@item.postId">Không thích</span>
+                            </a>
+                            <span id="sumDislike_@item.postId"></span>
+                        </td>
+                        <td class="cmt" id="cmt">
+                            <a title="Thích điều này" role="button" onclick="focusComment(@item.postId)">
+                                <i class="icmt"></i>
+                                <span>Bình luận</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <hr />
+            <div class="comment" id="comment_@item.postId" style="width:100%; height:auto">
+
+                @if (item.Comments.Count() != 0)
+                {
+                    <script type="text/javascript">
+                        var dataToBeSend = {
+                            postId: @item.postId,
+                            commentId:0
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: '/Comment/LoadComment',
+                            data: JSON.stringify(dataToBeSend),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (chuoiJson) {
+                                var hienThi = chuoiJson.split("|")[0];
+                                var cmtId = chuoiJson.split("|")[1];
+                                //alert(cmtId);
+                                var id = "comment_" + @item.postId;
+                                var table = document.createElement("table");
+                                table.innerHTML=hienThi;
+                                document.getElementById(id).appendChild(table);
+
+                                var cmtHidden = "#comment_hidden_"+@item.postId;
+                                //alert(cmtHidden);
+                                $(cmtHidden).val(cmtId);
+                                //var cmtId = $(cmtHidden).val();
+                                // var postID = @item.postId;
+                                //var auto_refresh = setInterval(function() { autoReLoadComment(postID,cmtId) }, 5000);
+                            },
+                        })
+                    </script>
+                }
+                <input type="hidden" id="comment_hidden_@item.postId" value=0 />
+            </div>
+
+            <div class="comment" style="width:100%; height:auto">
+                <table>
+                    <tr>
+                        <td class="col1">
+                            <img class="img-responsive" alt="avatar" src="@user.avatar" />
+                        </td>
+                        <td class="col2">
+                            <input type="text" class="cmttext" id="cmttext_@item.postId" placeholder="Bạn nghĩ gì...?" onkeydown="if (event.keyCode == 13)  insertComment(@item.postId,@user.userId)" />
+                        </td>
+                        <td class="col3"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    }
+</div>
+<div id="divPostsLoader"></div>
+<input type="hidden" id="userId" value="@user.userId" />
+
+@*<div class="hidden" id="divHidden">
+    <div class="acc_infor">
+        <div class="acc_avatar">
+            <img src="@user.avatar" class="img-thumbnail img-responsive" />
+        </div>
+        <div class="acc_nickName">
+            <p>@user.nickName</p>
+        </div>
+    </div>
+    <div class="acc_bottom">
+        <input type="button" class="btn btn-sm btn-info" style="margin:3px;" value="Bạn bè" />
+        <input type="button" class="btn btn-sm btn-info" style="margin: 3px auto" value="Đang theo dõi" />
+        <input type="button" class="btn btn-sm btn-info" style="float:right;margin:3px;" value="Tin nhắn" />
+    </div>
+</div>*@
